@@ -417,6 +417,8 @@ header a:hover {
 }
 
 .success-add {
+  user-select:none;
+  text-align: center;
   box-shadow: 0px 2px 15px 1px rgb(0 0 0 / 35%);
   transition: .3s all;
   display: block;

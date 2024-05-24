@@ -269,13 +269,21 @@ checkoutButton.addEventListener('click', function() {
   const itemContainers = document.querySelectorAll('.item-container');
   itemContainers.forEach((container, index) => {
     const itemTitle = container.querySelector('.item-title').textContent;
-    const itemDescription = container.querySelectorAll('.item-description p');
+    const itemDescriptionElements = container.querySelectorAll('.item-description p');
+    let size = '';
+    let ice = '';
+    let sugar = '';
+    if (itemDescriptionElements.length === 3) {
+      size = itemDescriptionElements[0].textContent;
+      ice = itemDescriptionElements[1].textContent;
+      sugar = itemDescriptionElements[2].textContent;
+    }
     const itemPrice = container.querySelector(`.item-price-${index}`).getAttribute('value');
     productDetails.push({
       title: itemTitle,
-      size: itemDescription[0].textContent,
-      ice: itemDescription[1].textContent,
-      sugar: itemDescription[2].textContent,
+      size: size,
+      ice: ice,
+      sugar: sugar,
       price: itemPrice
     });
   });
