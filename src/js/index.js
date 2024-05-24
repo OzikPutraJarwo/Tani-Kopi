@@ -1,19 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // function setupToggleButton() {
-  //   const mobileMenu = document.querySelector("header nav .mobile-menu");
-  //   const menu = document.querySelector("header nav .menu");
-  //   mobileMenu.addEventListener("click", function () {
-  //     menu.classList.toggle("show");
-  //   });
-  //   // Remove class kalau diklik diluar
-  //   document.addEventListener("click", function (event) {
-  //     if (!menu.contains(event.target) && !mobileMenu.contains(event.target)) {
-  //       menu.classList.remove("show");
-  //     }
-  //   });
-  // }
-});
-
 // Hero button smooth scroll to #recent
 window.addEventListener("DOMContentLoaded", (event) => {
   document
@@ -52,6 +36,7 @@ function nextTestimonial() {
 var autoplayInterval = setInterval(nextTestimonial, 3000);
 testimonials.forEach(function (testimonial, index) {
   var button = document.createElement("button");
+  button.setAttribute("aria-label","Navigation")
   button.addEventListener("click", function () {
     clearInterval(autoplayInterval);
     currentIndex = index;

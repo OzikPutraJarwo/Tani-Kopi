@@ -54,10 +54,18 @@ section h2.sec-title {
   z-index: -1;
   height: 100%;
   width: 100%;
-  background: url(../../assets/site/Hero-bg.png);
+  background: url(/assets/site/Hero-bg.png);
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+@media screen and (max-width:468px){
+  #hero:before {
+    background: url(/assets/site/Hero-bg-mobile.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 #hero .text {
@@ -140,6 +148,10 @@ section h2.sec-title {
 }
 
 /* Gallery */
+
+#gallery {
+  overflow: hidden;
+}
 
 #gallery .wrap {
   max-width: 1100px;
