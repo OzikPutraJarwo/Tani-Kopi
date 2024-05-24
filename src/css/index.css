@@ -40,7 +40,7 @@ section h2.sec-title {
 #hero {
   padding-top: 60px;
   margin-bottom: 90px;
-  padding: min(30%, 150px) 10px;
+  padding: min(30%, 150px) 20px;
   position: relative;
   overflow: hidden;
   margin-bottom: 30px;
@@ -305,27 +305,6 @@ section h2.sec-title {
     opacity: 1;
   }
 
-  footer .footer-wrap {
-    gap: 0;
-    grid-template-columns: 1fr;
-  }
-
-  footer .left,
-  footer .right {
-    text-align: left;
-    order: 1;
-    padding: 30px 0;
-  }
-
-  footer .middle {
-    order: 2;
-    text-align: left;
-    margin: 0 -30px;
-  }
-
-  footer .middle .social {
-    justify-content: left;
-  }
   #gallery .wrap .left {
     grid-area: 1 / 1 / 3 / 3;
   }

@@ -33,7 +33,10 @@ function openov(){
 
 function closeov() {
   document.querySelector(".overlay").classList.remove("show");
-  document.querySelector(".popup").classList.remove("show");
+  const popupElement = document.querySelector(".popup");
+  if (popupElement) {
+    popupElement.classList.remove("show");
+  }
   document.body.classList.remove("ov");
   fadeOut(document.querySelector(".overlay"));
   fadeOut(document.querySelector(".modal-content"));

@@ -622,14 +622,10 @@ footer .right .work-hours p span:first-child {
     margin: 0 2.5px;
   }
 
-
-
   .modal .item-container .button-container .item-quantity .value input {
     width: 50px;
     height: 25px;
   }
-
-
 
   .modal #modal-footer {
     grid-template-columns: 1fr 1fr;
@@ -669,5 +665,25 @@ footer .right .work-hours p span:first-child {
 
   .modal #cartItemsContainer {
     margin: 10px 0;
+  }
+  footer .footer-wrap {
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+  footer .left,
+  footer .right {
+    text-align: left;
+    order: 1;
+    padding: 30px 0;
+  }
+
+  footer .middle {
+    order: 2;
+    text-align: left;
+    margin: 0 -30px;
+  }
+
+  footer .middle .social {
+    justify-content: left;
   }
 }
