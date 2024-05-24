@@ -81,9 +81,13 @@ function addToCart() {
   const originalPrice = document
     .querySelector(".popup .price")
     .getAttribute("value");
-  const size = document.querySelector(".popup #hiddenSizeInput").value;
-  const type = document.querySelector(".popup #hiddenTypeInput").value;
-  const sugar = document.querySelector(".popup #hiddenSugarInput").value;
+
+  const sizeSelection = document.querySelector(".popup .size select");
+  if (sizeSelection){
+    var sizepop = document.querySelector(".popup #hiddenSizeInput").value;
+    var typepop = document.querySelector(".popup #hiddenTypeInput").value;
+    var sugarpop = document.querySelector(".popup #hiddenSugarInput").value;
+  };
 
   // Initialize cartItems as an empty array
   let cartItems = [];
@@ -103,9 +107,9 @@ function addToCart() {
     image: productImage,
     quantity: productQuantity,
     originalPrice: originalPrice,
-    size: size,
-    type: type,
-    sugar: sugar,
+    size: sizepop,
+    type: typepop,
+    sugar: sugarpop,
   };
   cartItems.push(newProductData);
 

@@ -10,15 +10,16 @@ const fadeOut = (el) => { el.style.opacity = 1.5; (function fade() { if ((el.sty
 
 const fadeIn = (el, display) => { el.style.opacity = 0; el.style.display = display || "block"; (function fade() { var val = parseFloat(el.style.opacity); if (!((val += 0.1) > 1)) { el.style.opacity = val; requestAnimationFrame(fade); } })(); };
 
-window.addEventListener("DOMContentLoaded", function () {
-  function updateCartCount() {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    console.log(cartItems);
-    const cartCount = document.getElementById("cart-count");
-    if (cartCount) {
-      cartCount.textContent = cartItems.length;
-    }
+function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  console.log(cartItems);
+  const cartCount = document.getElementById("cart-count");
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
   }
+};
+
+window.addEventListener("DOMContentLoaded", function () {
   updateCartCount();
 });
 
@@ -37,6 +38,7 @@ function closeov() {
   fadeOut(document.querySelector(".overlay"));
   fadeOut(document.querySelector(".modal-content"));
   closeModal();
+  updateCartCount();
 };
 
 function toggleov(element, action) {
@@ -100,10 +102,9 @@ function displayCartModal() {
     const itemName = document.createElement("p");
     itemName.classList.add("item-title")
     itemName.textContent = item.name;
-
+    
     const itemDescription = document.createElement("div");
     itemDescription.classList.add("item-description");
-
     const itemSize = document.createElement("p");
     itemSize.textContent = "Size : " + item.size;
     const itemType = document.createElement("p");
@@ -111,16 +112,18 @@ function displayCartModal() {
     const itemSugar = document.createElement("p");
     itemSugar.textContent = "Sugar : " + item.sugar;
 
-    itemDescription.appendChild(itemSize);
-    itemDescription.appendChild(itemType);
-    itemDescription.appendChild(itemSugar);
-
+    if (item.size != undefined){
+      itemDescription.appendChild(itemSize);
+      itemDescription.appendChild(itemType);
+      itemDescription.appendChild(itemSugar);
+    };
+    
     // Create item price element
     const itemPrice = document.createElement("p");
     itemPrice.textContent = item.price;
     itemPrice.classList.add(`item-price-${index}`);
     itemPrice.setAttribute("value", item.originalPrice); // Store the base price for calculations
-
+    
     itemText.appendChild(itemName);
     itemText.appendChild(itemDescription);
     itemText.appendChild(itemPrice);
@@ -256,7 +259,35 @@ function deleteCartItem(index) {
 
   // Re-render the cart items
   displayCartModal();
-}
+};
+
+const checkoutButton = document.querySelector('.modal #modal-footer .checkout span');
+checkoutButton.addEventListener('click', function() {
+  const totalPrice = document.getElementById('total-price').getAttribute('value');
+  const servingOption = document.querySelector('#modal-footer .serving select').value;
+  const productDetails = [];
+  const itemContainers = document.querySelectorAll('.item-container');
+  itemContainers.forEach((container, index) => {
+    const itemTitle = container.querySelector('.item-title').textContent;
+    const itemDescription = container.querySelectorAll('.item-description p');
+    const itemPrice = container.querySelector(`.item-price-${index}`).getAttribute('value');
+    productDetails.push({
+      title: itemTitle,
+      size: itemDescription[0].textContent,
+      ice: itemDescription[1].textContent,
+      sugar: itemDescription[2].textContent,
+      price: itemPrice
+    });
+  });
+  let message = `Halo, Tani Kopi! Saya ingin memesan:\n\n`;
+  productDetails.forEach((product, index) => {
+    message += `${index + 1}. ${product.title}\nSize : ${product.size}\nIce : ${product.ice}\nSugar : ${product.sugar}\nRp ${product.price}\n\n`;
+  });
+  message += `\nServing: ${servingOption}\n\n*Total: Rp ${totalPrice}*`;
+  const phoneNumber = '085654141926';
+  const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(whatsappLink, '_blank');
+});
 
 const modalContent = document.querySelector('.modal-content');
 
