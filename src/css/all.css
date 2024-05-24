@@ -417,7 +417,7 @@ header a:hover {
 }
 
 .success-add {
-  user-select:none;
+  user-select: none;
   text-align: center;
   box-shadow: 0px 2px 15px 1px rgb(0 0 0 / 35%);
   transition: .3s all;
@@ -618,6 +618,8 @@ footer .right .work-hours p span:first-child {
   .modal .item-container .button-container .item-quantity .plus {
     font-size: 75%;
     height: 25px;
+    width: 25px;
+    margin: 0 2.5px;
   }
 
 

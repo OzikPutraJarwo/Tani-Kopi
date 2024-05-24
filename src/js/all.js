@@ -68,7 +68,7 @@ const closeButton = document.querySelector(".close");
 // Add click event listener to close button
 closeButton.addEventListener("click", closeModal);
 
-function displayCartModal() {
+function displayCartModal(shouldOpenModal = true) {
   const totalPriceElement = document.getElementById("total-price");
 
   const cartItemsData = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -244,21 +244,16 @@ function displayCartModal() {
   totalPriceElement.textContent =
     "Rp " + totalPriceAllItems.toLocaleString("id-ID");
   // Open the modal
-  openModal();
-}
+  if (shouldOpenModal) {
+    openModal();
+  }
+};
 
 function deleteCartItem(index) {
-  // Retrieve the cart items from localStorage
   const cartItemsData = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-  // Remove the item at the specified index
   cartItemsData.splice(index, 1);
-
-  // Update the cart items in localStorage
   localStorage.setItem("cartItems", JSON.stringify(cartItemsData));
-
-  // Re-render the cart items
-  displayCartModal();
+  displayCartModal(false);
 };
 
 const checkoutButton = document.querySelector('.modal #modal-footer .checkout span');
