@@ -69,6 +69,7 @@ body.ov {
 }
 
 .product .img img {
+  width: auto;
   max-height: 160px;
   margin: auto;
   display: block;
