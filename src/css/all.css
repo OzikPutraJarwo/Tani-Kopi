@@ -274,8 +274,6 @@ header a:hover {
   grid-template-columns: 50px calc(100% - 50px);
 }
 
-.modal .item-container .item-details .item-image {}
-
 .modal .item-container .item-details .item-image img {
   max-height: 100px;
 }
@@ -387,8 +385,6 @@ header a:hover {
   border-right: 8px solid var(--primary);
 }
 
-.modal #modal-footer .serving span {}
-
 .modal #modal-footer .checkout {
   display: flex;
   gap: 30px;
@@ -419,6 +415,7 @@ header a:hover {
 }
 
 .success-add {
+  box-shadow: 0px 2px 15px 1px rgb(0 0 0 / 35%);
   transition: .3s all;
   display: block;
   position: fixed;
@@ -427,7 +424,7 @@ header a:hover {
   background: mediumseagreen;
   left: 50%;
   transform: translateX(-50%);
-  padding: 10px 20px;
+  padding: 15px 20px;
   border-radius: 0 0 10px 10px;
   color: white;
 }
@@ -447,8 +444,6 @@ footer .footer-wrap {
   grid-template-columns: 1fr 1.5fr 1fr;
   gap: 30px;
 }
-
-footer a {}
 
 footer .left {
   text-align: left;
