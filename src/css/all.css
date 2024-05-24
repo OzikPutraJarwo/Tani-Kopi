@@ -224,7 +224,7 @@ header a:hover {
 
 .modal .modal-container {
   display: grid;
-  grid-template-rows: 30px calc(100% - 80px) 50px;
+  grid-template-rows: 30px calc(100% - 97px) 66px;
   grid-auto-flow: column;
   height: 100%;
 }
