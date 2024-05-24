@@ -93,6 +93,35 @@
       </div>
     </main>
 
+    <!-- Modal HTML structure -->
+    <div id="cartModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-container">
+          <div class="modal-header">
+            <p class="cart-title">Cart Items</p>
+            <span class="close"><i class="fas fa-times"></i></span>
+          </div>
+          <div id="cartItemsContainer"></div>
+          <div id="modal-footer">
+            <div class="serving">
+              <p>Serving:</p>
+              <span>
+                <select>
+                  <option>Dine in</option>
+                  <option>Take Away</option>
+                </select>
+              </span>
+            </div>
+            <div class="checkout">
+              <p id="total-price"></p>
+              <span href="">Check Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="success-add">Product added to cart!</div>
+
     <footer>
       <div class="footer-wrap">
         <div class="left">
