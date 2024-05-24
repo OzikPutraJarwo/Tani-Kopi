@@ -192,7 +192,7 @@ body.ov {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%) scale(0);
-  z-index: 102;
+  z-index: 999;
   transition: 0.3s all;
   min-width: 330px;
   max-width: 1000px;

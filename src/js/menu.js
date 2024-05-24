@@ -1,60 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Function to load navbar HTML
-  function loadNavbar() {
-    fetch("./src/components/navbar/navbar.html")
-      .then((response) => response.text())
-      .then((data) => {
-        document.getElementById("navbar").innerHTML = data;
-        addActiveClass(); // Add active class to current page link
-        setupToggleButton(); // Setup toggle button click event
-        setupScrollBehavior(); // Setup scroll behavior
-      })
-      .catch((error) => console.log("Error loading navbar:", error));
-  }
-
-  // Function to add active class to current page link
-  function addActiveClass() {
-    var currentLocation = window.location.href;
-    var navLinks = document.querySelectorAll("#navbar a");
-
-    navLinks.forEach(function (link) {
-      if (link.href === currentLocation) {
-        link.classList.add("active");
-      }
-    });
-  }
-
-  function setupToggleButton() {
-    const mobileMenu = document.querySelector("header nav .mobile-menu");
-    const menu = document.querySelector("header nav .menu");
-    mobileMenu.addEventListener("click", function () {
-      menu.classList.toggle("show");
-    });
-    // Remove class kalau diklik diluar
-    document.addEventListener("click", function (event) {
-      if (!menu.contains(event.target) && !mobileMenu.contains(event.target)) {
-        menu.classList.remove("show");
-      }
-    });
-  }
-
-  function setupScrollBehavior() {
-    const header = document.querySelector("header");
-    window.onscroll = function () {
-      if (document.documentElement.scrollTop >= 200) {
-        console.log("test");
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
-    };
-  }
-
-  // Load the navbar when the DOM is ready
-  loadNavbar();
-});
-
 var body = document.querySelector("body");
+const products = document.querySelectorAll(".product");
 
 document.querySelector(".tab").innerHTML = `<p class="all">All Menu</p>${[
   ...new Set(
@@ -66,8 +11,6 @@ document.querySelector(".tab").innerHTML = `<p class="all">All Menu</p>${[
     )
   ),
 ].join("")}`;
-
-const products = document.querySelectorAll(".product");
 
 for (var i = 0; i < products.length; i++) {
   var product = products[i];
@@ -101,25 +44,16 @@ tabs.forEach(function (tab) {
 tabs[0].classList.add("active");
 
 products.forEach((product) => {
+  product.setAttribute('onclick', 'openov()');
   product.addEventListener("click", () => {
     const clonedContent = product.cloneNode(true);
+    clonedContent.removeAttribute('onclick');
     const popup = document.querySelector(".popup");
-    const ov = document.querySelector(".overlay");
     popup.innerHTML = "";
     popup.appendChild(clonedContent);
     popup.classList.add("show");
-    ov.classList.add("show");
-    body.classList.add("ov");
-    fadeIn(document.querySelector(".overlay"));
   });
 });
-
-function closePopup() {
-  document.querySelector(".popup").classList.remove("show");
-  document.querySelector(".overlay").classList.remove("show");
-  fadeOut(document.querySelector(".overlay"));
-  body.classList.remove("ov");
-}
 
 function appendHTML(selector, html) {
   var elements = document.querySelectorAll(selector);
@@ -179,8 +113,8 @@ function addToCart() {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
   // Optionally, you can provide feedback to the user
-  alert("Product added to cart!");
-  closePopup();
+  (function(){document.querySelector('.success-add').style.top='0px',setTimeout(()=>document.querySelector('.success-add').style.top='',3000)})();
+  closeov();
 }
 
 beforeHTML(
@@ -201,7 +135,7 @@ appendHTML(
   ".product-wrap",
   `
   <div onclick="addToCart()" class="add"><span>Add to cart</span><i class="fas fa-cart-plus"></i></div>
-  <div class="close-pop" onclick="closePopup()"><i class="fas fa-times"></i></div>
+  <div class="close-pop" onclick="closeov()"><i class="fas fa-times"></i></div>
 `
 );
 
@@ -310,27 +244,4 @@ function updatePrice(quantity) {
     priceElement.setAttribute("priceValue", totalPrice);
     // priceElement.setAttribute("value", totalPrice);
   }
-}
-
-function fadeOut(el) {
-  el.style.opacity = 1;
-  (function fade() {
-    if ((el.style.opacity -= 0.08) < 0) {
-      el.style.display = "none";
-    } else {
-      requestAnimationFrame(fade);
-    }
-  })();
-}
-
-function fadeIn(el, display) {
-  el.style.opacity = 0;
-  el.style.display = display || "block";
-  (function fade() {
-    var val = parseFloat(el.style.opacity);
-    if (!((val += 0.08) > 1)) {
-      el.style.opacity = val;
-      requestAnimationFrame(fade);
-    }
-  })();
 }

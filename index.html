@@ -15,6 +15,9 @@
   </head>
 
   <body>
+
+    <div class="overlay"></div>
+
     <header>
       <div class="header-wrap">
         <div class="mobile-nav">
@@ -156,7 +159,6 @@
       <h2 class="sec-title">Our Best Menu</h2>
       <div class="wrap">
         <div class="tab"></div>
-        <div class="overlay" onclick="closePopup()"></div>
         <div class="popup"></div>
         <div class="menu-list" id="index-container"></div>
       </div>
@@ -209,42 +211,34 @@
       </div>
     </section>
 
-    <!--
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.4262385576408!2d112.60974266289355!3d-7.954827520923082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e788341a48ab5c3%3A0xf1e5a084dbe80d96!2sTANI%20KOPI!5e0!3m2!1sid!2sid!4v1716092230050!5m2!1sid!2sid"
-            width="600"
-            height="450"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-          -->
-
     <!-- Modal HTML structure -->
     <div id="cartModal" class="modal">
       <div class="modal-content">
-        <div class="modal-header">
-          <h2>Cart Items</h2>
-          <span class="close">&times;</span>
-        </div>
-        <div id="cartItemsContainer"></div>
-        <div id="modal-footer">
-          <div class="dropdown">
-            <button class="dropbtn" id="dropbtn">Dine In</button>
-            <div class="dropdown-content" id="dropdown-content">
-              <a data-value="Dine In">Dine In</a>
-              <hr />
-              <a data-value="Take Away">Take Away</a>
-            </div>
+        <div class="modal-container">
+          <div class="modal-header">
+            <p class="cart-title">Cart Items</p>
+            <span class="close"><i class="fas fa-times"></i></span>
           </div>
-          <div class="checkout">
-            <p id="total-price"></p>
-            <span href="">Check Out</span>
+          <div id="cartItemsContainer"></div>
+          <div id="modal-footer">
+            <div class="serving">
+              <p>Serving:<p>
+              <span>
+                <select>
+                  <option>Dine in</option>
+                  <option>Take Away</option>
+                </select>
+              </span>
+            </div>
+            <div class="checkout">
+              <p id="total-price"></p>
+              <span href="">Check Out</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="success-add">Product added to cart!</div>
 
     <footer>
       <div class="footer-wrap">

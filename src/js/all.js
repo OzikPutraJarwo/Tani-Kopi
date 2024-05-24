@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+const fadeOut = (el) => { el.style.opacity = 1.5; (function fade() { if ((el.style.opacity -= 0.08) < 0) { el.style.display = "none"; } else { requestAnimationFrame(fade); } })(); };
+
+const fadeIn = (el, display) => { el.style.opacity = 0; el.style.display = display || "block"; (function fade() { var val = parseFloat(el.style.opacity); if (!((val += 0.1) > 1)) { el.style.opacity = val; requestAnimationFrame(fade); } })(); };
+
 window.addEventListener("DOMContentLoaded", function () {
   function updateCartCount() {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -13,8 +17,37 @@ window.addEventListener("DOMContentLoaded", function () {
       cartCount.textContent = cartItems.length;
     }
   }
-
   updateCartCount();
+});
+
+// Background overlay for popup & cart
+
+function openov(){
+  document.querySelector(".overlay").classList.add("show");
+  document.body.classList.add("ov");
+  fadeIn(document.querySelector(".overlay"));
+};
+
+function closeov() {
+  document.querySelector(".overlay").classList.remove("show");
+  document.querySelector(".popup").classList.remove("show");
+  document.body.classList.remove("ov");
+  fadeOut(document.querySelector(".overlay"));
+  fadeOut(document.querySelector(".modal-content"));
+  closeModal();
+};
+
+function toggleov(element, action) {
+  document.querySelectorAll(element).forEach((el) => el.setAttribute('onclick', `${action}()`));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  toggleov('.overlay', 'closeov');
+
+  toggleov('.popup .product .close-pop', 'closeov');
+
+  toggleov('header .cart-button', 'openov');
+  toggleov('.modal-header .close', 'closeov');
 });
 
 // Modals function
@@ -62,7 +95,8 @@ function displayCartModal() {
     itemText.classList.add("item");
 
     // Create item name element
-    const itemName = document.createElement("h5");
+    const itemName = document.createElement("p");
+    itemName.classList.add("item-title")
     itemName.textContent = item.name;
 
     const itemDescription = document.createElement("div");
@@ -222,34 +256,13 @@ function deleteCartItem(index) {
   displayCartModal();
 }
 
-// Function to close the modal
+const modalContent = document.querySelector('.modal-content');
+
 function closeModal() {
-  modal.style.display = "none";
+  modal.classList.remove("show");
+  fadeOut(modalContent);
 }
-// Function to open the modal
 function openModal() {
-  modal.style.display = "flex";
+  modal.classList.add("show");
+  fadeIn(modalContent);
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const dropbtn = document.getElementById("dropbtn");
-  const dropdownContent = document.getElementById("dropdown-content");
-
-  dropbtn.addEventListener("click", function () {
-    dropdownContent.style.display = "block";
-  });
-
-  dropdownContent.addEventListener("click", function (event) {
-    dropbtn.textContent = event.target.getAttribute("data-value");
-    dropdownContent.style.display = "none";
-  });
-
-  // Close the dropdown if the user clicks outside of it
-  window.addEventListener("click", function (event) {
-    if (!event.target.matches("#dropbtn")) {
-      if (dropdownContent.style.display == "block") {
-        dropdownContent.style.display = "none";
-      }
-    }
-  });
-});
